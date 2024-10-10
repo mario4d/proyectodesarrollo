@@ -5,8 +5,8 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['agregar'])) {
         
-        $nombre = $_POST['nombre'] ?? '';
-        $cantidad = $_POST['cantidad'] ?? '';
+        $nombre = $_POST['Codigo'] ?? '';
+        $cantidad = $_POST[''] ?? '';
         $precio = $_POST['precio'] ?? '';
         $detalle = $_POST['detalle'] ?? '';
         $id = $_POST['id'] ?? '';
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['productos'] = array();
         }
 
-        n
+        
         $_SESSION['productos'][] = $producto;
 
         

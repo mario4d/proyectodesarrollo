@@ -15,33 +15,31 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Código</th>
+                        <td><input type="number" name="id" placeholder="Ingrese el ID del producto" required></td>
+                    </tr>
+                    <tr>
                         <th>Nombre del Producto</th>
                         <td><input type="text" name="nombre" placeholder="Ingrese el nombre del producto" required></td>
                     </tr>
                     <tr>
-                        <th>Cantidad</th>
-                        <td><input type="number" name="cantidad" placeholder="Ingrese la cantidad" required></td>
+                        <th>Descripción del producto</th>
+                        <td><input type="text" name="detalle" placeholder="Ingrese los detalles del producto" required></td>
                     </tr>
                     <tr>
                         <th>Precio del producto</th>
                         <td><input type="number" name="precio" placeholder="Ingrese el precio" required></td>
                     </tr>
                     <tr>
-                        <th>Detalle</th>
-                        <td><input type="text" name="detalle" placeholder="Ingrese los detalles del producto" required></td>
+                        <th>Depreciación del producto</th>
+                        <td><input type="number" name="cantidad" placeholder="Ingrese la cantidad" required></td>
                     </tr>
+                    
                     <tr>
-                        <th>ID de Producto</th>
-                        <td><input type="number" name="id" placeholder="Ingrese el ID del producto" required></td>
-                    </tr>
-                    <tr>
-                        <th>Nombre del Proveedor</th>
+                        <th>Stock</th>
                         <td><input type="text" name="nproveedor" placeholder="Ingrese el nombre del proveedor" required></td>
                     </tr>
-                    <tr>
-                        <th>Nombre del Departamento</th>
-                        <td><input type="text" name="ndepartamento" placeholder="Ingrese el nombre del departamento" required></td>
-                    </tr>
+                    
                 </thead>
             </table>
 
@@ -59,14 +57,12 @@
             <table border="1" width="100%">
                 <thead>
                     <tr>
+                        <th>Código</th>
                         <th>Nombre</th>
-                        <th>Cantidad</th>
+                        <th>Descripcion</th>
                         <th>Precio</th>
-                        <th>Detalle</th>
-                        <th>ID</th>
-                        <th>Proveedor</th>
-                        <th>Departamento</th>
-                        <th>Acciones</th> 
+                        <th>Depreciación</th>
+                        <th>Stock</th>
                     </tr>
                 </thead>
                 <tbody>
