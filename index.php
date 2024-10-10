@@ -15,7 +15,7 @@
                 <thead>
                     <tr>
                         <th>Código</th>
-                        <td><input type="number" name="id" placeholder="Ingrese el ID del producto" required></td>
+                        <td><input type="number" name="id" placeholder="Ingrese el ID del producto" maxlength="7" required></td>
                     </tr>
                     <tr>
                         <th>Nombre del Producto</th>
