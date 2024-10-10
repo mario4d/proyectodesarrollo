@@ -10,7 +10,6 @@
     <div class="container">
         <h2>Añadir producto</h2>
         
-        
         <form action="Operaciones.php" method="POST">
             <table>
                 <thead>
@@ -30,17 +29,33 @@
                         <th>Precio del producto</th>
                         <td><input type="number" name="precio" placeholder="Ingrese el precio" required></td>
                     </tr>
-                    <tr>
-                        <th>Depreciación del producto</th>
-                        <td><input type="number" name="cantidad" placeholder="Ingrese la cantidad" required></td>
-                    </tr>
-                    
+                   
                     <tr>
                         <th>Stock</th>
                         <td><input type="text" name="nproveedor" placeholder="Ingrese el nombre del proveedor" required></td>
                     </tr>
-                    
                 </thead>
+            </table>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th><label>ID proveedor</label></th>
+                        <td><input type="number" name="id_proveedor" placeholder="Ingrese el ID del proveedor" required></td>
+                    </tr>
+                    <tr>
+                        <th><label>Nombre de proveedor</label></th>
+                        <td><input type="text" name="nombre_proveedor" placeholder="Ingrese el nombre del proveedor" required></td>
+                    </tr>
+                    <tr>
+                        <th><label>Teléfono del proveedor</label></th>
+                        <td><input type="number" name="telefono_proveedor" placeholder="Ingrese el teléfono del proveedor" required></td>
+                    </tr>
+                    <tr>
+                        <th><label>Email del proveedor</label></th>
+                        <td><input type="email" name="email_proveedor" placeholder="Ingrese el email del proveedor" required></td>
+                    </tr>
+                </thead> 
             </table>
 
             <div class="text-center">
@@ -52,14 +67,13 @@
             <h2 class="text-center">Productos añadidos</h2>
         </form>
 
-        
         <div>
             <table border="1" width="100%">
                 <thead>
                     <tr>
                         <th>Código</th>
                         <th>Nombre</th>
-                        <th>Descripcion</th>
+                        <th>Descripción</th>
                         <th>Precio</th>
                         <th>Depreciación</th>
                         <th>Stock</th>
@@ -67,7 +81,6 @@
                 </thead>
                 <tbody>
                     <?php
-                    
                     include 'Operaciones.php';
                     ?>
                 </tbody>
