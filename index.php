@@ -19,36 +19,40 @@
     <div class="container">
         <h2>Añadir producto</h2>
         
-        <form action="index.php" method="POST">
+        <form action="Operaciones.php" method="POST"> 
             <div class="form-group">
-                <label>Código</label>
-                <input type="number" name="codigo" placeholder="Ingrese el ID del producto" maxlength="7" required>
+                <label for="codigo">Código</label>
+                <input type="number" id="codigo" name="codigo" placeholder="Ingrese el ID del producto" maxlength="7" required>
             </div>
             <div class="form-group">
-                <label>Nombre del Producto</label>
-                <input type="text" name="nombre" placeholder="Ingrese el nombre del producto" required>
+                <label for="nombre">Nombre del Producto</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre del producto" required>
             </div>
             <div class="form-group">
-                <label>Descripción del producto</label>
-                <input type="text" name="descripcion" placeholder="Ingrese los detalles del producto" required>
+                <label for="descripcion">Descripción del producto</label>
+                <input type="text" id="descripcion" name="descripcion" placeholder="Ingrese los detalles del producto" required>
             </div>
             <div class="form-group">
-                <label>Precio del producto</label>
-                <input type="number" name="precio" placeholder="Ingrese el precio" required>
+                <label for="precio">Precio del producto</label>
+                <input type="number" id="precio" name="precio" placeholder="Ingrese el precio" required>
             </div>
             <div class="form-group">
-                <label>Stock</label>
-                <input type="text" name="stock" placeholder="Ingrese el stock disponible" required>
+                <label for="stock">Stock</label>
+                <input type="text" id="stock" name="stock" placeholder="Ingrese el stock disponible" required>
             </div>
             <div class="form-group">
-                <label>Marca</label>
-                <input type="number" name="marca" placeholder="Ingrese la marcar" required>
+                <label for="marca">Marca</label>
+                <input type="text" id="marca" name="marca" placeholder="Ingrese la marca" required>
             </div>
             <div class="form-group">
-                <label>Modelo</label>
-                <input type="text" name="modelo" placeholder="Ingrese el modelo" required>
+                <label for="modelo">Modelo</label>
+                <input type="text" id="modelo" name="modelo" placeholder="Ingrese el modelo" required>
             </div>
-            
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" name="agregar">Guardar</button>
+                <button type="reset" class="btn btn-secondary">Cancelar</button>
+                
+            </div>
         </form>
 
         <br>
@@ -65,11 +69,12 @@
                         <th>Stock</th>
                         <th>Marca</th>
                         <th>Modelo</th>
-                        
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
+                    session_start();
                     if (!empty($_SESSION['productos'])) {
                         foreach ($_SESSION['productos'] as $indice => $producto) {
                             echo "<tr>
@@ -78,11 +83,12 @@
                                     <td>{$producto['descripcion']}</td>
                                     <td>{$producto['precio']}</td>
                                     <td>{$producto['stock']}</td>
-            
+                                    <td>{$producto['marca']}</td>
+                                    <td>{$producto['modelo']}</td>
                                     <td>
                                         <form action='index.php' method='POST' style='display:inline;'>
                                             <input type='hidden' name='indice' value='{$indice}'>
-                                            <button type='submit' name='eliminar' class='btn btn-danger'>Eliminar</button>
+                                            <input type='submit' name='eliminar' class='btn btn-danger'>
                                         </form>
                                     </td>
                                 </tr>";
