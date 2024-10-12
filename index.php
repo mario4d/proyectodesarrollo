@@ -51,14 +51,13 @@
             <div class="text-center">
                 <button type="submit" class="btn btn-primary" name="agregar">Guardar</button>
                 <button type="reset" class="btn btn-secondary">Cancelar</button>
-                
             </div>
         </form>
 
         <br>
         <h2 class="text-center">Productos añadidos</h2>
 
-        <div>
+        <div class="table-container">
             <table>
                 <thead>
                     <tr>
@@ -86,9 +85,9 @@
                                     <td>{$producto['marca']}</td>
                                     <td>{$producto['modelo']}</td>
                                     <td>
-                                        <form action='index.php' method='POST' style='display:inline;'>
+                                        <form action='Operaciones.php' method='POST' style='display:inline;'>
                                             <input type='hidden' name='indice' value='{$indice}'>
-                                            <input type='submit' name='eliminar' class='btn btn-danger'>
+                                            <input type='submit' name='eliminar' class='btn btn-danger' value='Eliminar'>
                                         </form>
                                     </td>
                                 </tr>";
