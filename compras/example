@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRUEBAS CRUD</title>
+</head>
+<body>
+    <h1>pruebas crud</h1>
+    <?php
+        include_once('../credenciales.php');
+        echo ($host . $dbname . $username . $pass);
+        // $crud = new CRUD($host, $dbname, $username, $pass);
+        $values = ['001', 'laptop acer', 'descripcionArticulo1'];
+        $table = 'compra';
+        $fields = ['id', 'nombre', 'descripcion'];
+        //$salida = $crud->create($table, $fields, $values);
+
+        //echo '<p>' . $salida . '</p>'
+    ?>
+</body>
+</html>
+
+
+INSERT INTO
+`compra_productos` (`ID_Compra`, `Codigo_Producto`, `Cantidad_Producto`, `Precio_Producto`, `Proveedor_ID`, `Departamento_ID`, `Detalle_Producto`)
+VALUES ('001', '1', '2', '982.23', '2', '1', NULL);
