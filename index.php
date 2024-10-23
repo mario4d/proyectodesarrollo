@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+<?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+include('conexion.php'); 
+include('Operaciones.php'); 
+
+?>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -9,10 +18,10 @@
 <body>
     <nav>
         <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Acerca de</a></li>
-            <li><a href="#">Servicios</a></li>
-            <li><a href="#">Contacto</a></li>
+            <li><a href="#"> Compra producto </a></li>
+            <li><a href="#">Solicitud</a></li>
+            <li><a href="#">Añadir producto</a></li>
+            <li><a href="#">Proveedores</a></li>
         </ul>
     </nav>
 
@@ -54,48 +63,6 @@
             </div>
         </form>
 
-        <br>
-        <h2 class="text-center">Productos añadidos</h2>
-
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Precio</th>
-                        <th>Stock</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    session_start();
-                    if (!empty($_SESSION['productos'])) {
-                        foreach ($_SESSION['productos'] as $indice => $producto) {
-                            echo "<tr>
-                                    <td>{$producto['codigo']}</td>
-                                    <td>{$producto['nombre']}</td>
-                                    <td>{$producto['descripcion']}</td>
-                                    <td>{$producto['precio']}</td>
-                                    <td>{$producto['stock']}</td>
-                                    <td>{$producto['marca']}</td>
-                                    <td>{$producto['modelo']}</td>
-                                    <td>
-                                        <form action='Operaciones.php' method='POST' style='display:inline;'>
-                                            <input type='hidden' name='indice' value='{$indice}'>
-                                            <input type='submit' name='eliminar' class='btn btn-danger' value='Eliminar'>
-                                        </form>
-                                    </td>
-                                </tr>";
-                        }
-                    }
-                    ?>
-                </tbody>
-            </table>
         </div>
     </div>
 </body>
