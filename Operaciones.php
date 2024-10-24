@@ -2,6 +2,20 @@
 
 include('conexion.php'); // Incluir la conexión a la base de datos
 
+
+$query = "SELECT COUNT(*) as total_filas FROM productos";
+$result = $est->query($query);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $nuevo_codigo = $row['total_filas'] + 1;
+} else {
+    // Si no hay productos, el primer código será 1
+    $nuevo_codigo = 1;
+}
+
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Recoger los valores del formulario de manera segura
@@ -14,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $modelo = isset($_POST['modelo']) ? $_POST['modelo'] : '';
 
     // Consulta SQL para insertar el producto
-    $enviar = "INSERT INTO productos (Codigo, Nombre_Producto, Descripcion_Producto, Precio_Producto, Stock, Marca, Modelo) 
+    $enviar = "INSERT INTO productos (Codigo, Nombre_Producto, Marca_Producto, Modelo_Producto, Descripcion_Producto, Precio_Producto, Stock) 
                VALUES ('$codigo', '$nombre', '$descripcion', '$precio', '$stock', '$marca', '$modelo')";
 
     // Ejecutar la consulta y verificar si se ha insertado correctamente

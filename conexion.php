@@ -1,9 +1,9 @@
 <?php
 
 $host="localhost";
-$user="d72024";
-$pass="1234567";
-$db="ds82024";
+$user="userdb";
+$pass="passworddb";
+$db="proyecto_db";
 
 
 $est= mysqli_connect($host,$user,$pass,$db);

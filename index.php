@@ -16,7 +16,7 @@ include('Operaciones.php');
     <link rel="stylesheet" href="css/estilo.css"> 
 </head>
 <body>
-    <nav>
+<nav>
         <ul>
             <li><a href="#"> Compra producto </a></li>
             <li><a href="#">Solicitud</a></li>
@@ -31,31 +31,31 @@ include('Operaciones.php');
         <form action="Operaciones.php" method="POST"> 
             <div class="form-group">
                 <label for="codigo">Código</label>
-                <input type="number" id="codigo" name="codigo" placeholder="Ingrese el ID del producto" maxlength="7" required>
+                <input type="number" id="codigo" name="codigo" value="<?php echo $nuevo_codigo; ?>" readonly required>
             </div>
             <div class="form-group">
                 <label for="nombre">Nombre del Producto</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre del producto" required>
+                <input type="text" id="nombre" name="nombre" maxlength="20" placeholder="Ingrese el nombre del producto" required>
             </div>
             <div class="form-group">
                 <label for="descripcion">Descripción del producto</label>
-                <input type="text" id="descripcion" name="descripcion" placeholder="Ingrese los detalles del producto" required>
+                <input type="text" id="descripcion" name="descripcion" maxlength="20" placeholder="Ingrese los detalles del producto" required>
             </div>
             <div class="form-group">
                 <label for="precio">Precio del producto</label>
-                <input type="number" id="precio" name="precio" placeholder="Ingrese el precio" required>
+                <input type="text" id="precio" name="precio"  placeholder="Ingrese el precio" required oninput="validarNumero(this)">
             </div>
             <div class="form-group">
                 <label for="stock">Stock</label>
-                <input type="text" id="stock" name="stock" placeholder="Ingrese el stock disponible" required>
+                <input type="text" id="stock" name="stock" placeholder="Ingrese el stock disponible" required oninput="validarNumero(this)">
             </div>
             <div class="form-group">
                 <label for="marca">Marca</label>
-                <input type="text" id="marca" name="marca" placeholder="Ingrese la marca" required>
+                <input type="text" id="marca" name="marca" maxlength="20" placeholder="Ingrese la marca" required>
             </div>
             <div class="form-group">
                 <label for="modelo">Modelo</label>
-                <input type="text" id="modelo" name="modelo" placeholder="Ingrese el modelo" required>
+                <input type="text" id="modelo" name="modelo" maxlength="20" placeholder="Ingrese el modelo" required>
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary" name="agregar">Guardar</button>
@@ -67,3 +67,15 @@ include('Operaciones.php');
     </div>
 </body>
 </html>
+
+<script>
+        function validarNumero(input) {
+            // Expresión regular que permite hasta 6 dígitos antes del punto y 2 dígitos después del punto
+            const regex = /^\d{0,6}(\.\d{0,2})?$/;
+
+            // Si el valor del input no cumple con el patrón, se limpia
+            if (!regex.test(input.value)) {
+                input.value = input.value.slice(0, -1);  // Elimina el último carácter ingresado
+            }
+        }
+    </script>
