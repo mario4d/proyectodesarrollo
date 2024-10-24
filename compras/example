@@ -22,6 +22,42 @@
 </html>
 
 
+
+# USO DE FETCH API PARA ENVIAR UNA PETICION POST
+var url = "https://example.com/profile";
+var data = { username: "example" };
+
+fetch(url, {
+  method: "POST", // or 'PUT'
+  body: JSON.stringify(data), // data can be `string` or {object}!
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
+  .then((res) => res.json())
+  .catch((error) => console.error("Error:", error))
+  .then((response) => console.log("Success:", response));
+
+
+
+# EJEMPLO DE CONSULTA PARA INSERT EN COMPRA_PRODUCTOS
 INSERT INTO
 `compra_productos` (`ID_Compra`, `Codigo_Producto`, `Cantidad_Producto`, `Precio_Producto`, `Proveedor_ID`, `Departamento_ID`, `Detalle_Producto`)
 VALUES ('001', '1', '2', '982.23', '2', '1', NULL);
+
+
+# PARA DESPLEGAR OPTIONS EN UN SELECT
+
+// Array con las opciones
+const opciones = ['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4'];
+
+// Obtener el elemento <select>
+const select = document.getElementById('miSelect');
+
+// Recorrer el array y crear opciones
+opciones.forEach(opcion => {
+    const optionElement = document.createElement('option'); // Crear un nuevo elemento <option>
+    optionElement.value = opcion; // Asignar el valor
+    optionElement.textContent = opcion; // Asignar el texto que se mostrará
+    select.appendChild(optionElement); // Agregar la opción al <select>
+});

@@ -44,12 +44,50 @@ class CRUD {
 
 
     // SELECT FUNCTIONS
-    public function selectCompraProducto($fields, $table, $id) {
+
+    /**
+     * Hace una consulta SELECT a una sola fila de la tabla especificada.
+     *
+     * @param string|array $fields Array que contiene los campos a seleccionar en la consulta.
+     * @param string $table Contiene la tabla a seleccionar en la consulta.
+     * @param string $id ID a Seleccionar en la consulta.
+     *
+     * @return array|false Retorna los resultados de la consulta en un array asociativo.
+     */
+    public function selectOne($fields, $table, $id) {
         $processedFields = implode(', ', $fields);
+        $query = 'SELECT ' . $processedFields . ' FROM ' .  $table . ' WHERE ' . $id;
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return $result;
+    }
+
+    /**
+     * Hace una consulta SELECT a todas las filas de la tabla especificada.
+     * 
+     * @param string|array $fields
+     * @param string $table
+     * 
+     */
+    public function selectAll($fields, $table) {
+        $processedFields = implode(', ', $fields);
+
+        $query = 'SELECT ' . $processedFields . ' FROM ' .  $table;
+        $stmt = $this->pdo->prepare($query);
+
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+
+        return $result;
     }
 
 
     // UPDATE FUNCTIONS
+
     public function updateCompraProducto() {}
 
 
