@@ -1,5 +1,5 @@
 <?php
-require 'Conexion.php';
+require 'ConexionS.php';
 
 try {
     $query = "SELECT ID_Departamento, Nombre_Departamento FROM departamentos";

@@ -125,7 +125,7 @@
         <div class="cuadro">
             <h2>Añadir Producto</h2>
             <p></p>
-            <button>Añadir Producto</button>
+            <button onclick="window.location.href='index.php'">Añadir Producto</button>
             <i class="fas fa-box-open fa-2x" style="margin-top: 10px;"></i>
         </div>
 
