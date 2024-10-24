@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$username = 'ucompra';
-$pass = '12345';
+$username = 'userdb';
+$pass = 'passworddb';
 $dbname = 'proyecto_db';
 ?>

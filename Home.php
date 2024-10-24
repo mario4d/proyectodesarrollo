@@ -38,11 +38,10 @@
 
         .container {
             display: flex;
-            flex-grow: 1;
-            justify-content: center;
-            align-items: center;
             flex-wrap: wrap;
+            justify-content: center;
             padding: 20px;
+            gap: 20px; /* Espacio entre los cuadros */
         }
 
         .cuadro {
@@ -53,11 +52,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 100%;
-            max-width: 600px; 
+            width: 45%; /* Dos cuadros en fila */
             height: 300px; 
             padding: 30px; 
-            margin: 20px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
@@ -67,12 +64,12 @@
             transform: scale(1.05); 
         }
 
+        /* Responsivo para pantallas más pequeñas */
         @media (max-width: 768px) {
             .cuadro {
-                max-width: 90%; 
+                width: 100%; /* Apilar los cuadros en pantallas pequeñas */
             }
         }
-
 
         h2 {
             margin: 0;
