@@ -130,9 +130,9 @@
         </div>
 
         <div class="cuadro">
-            <h2>Añadir ProveedorE</h2>
+            <h2>Añadir Proveedor</h2>
             <p></p>
-            <button onclick="window.location.href='Proveedores'">Añadir Proveedor</button>
+            <button onclick="window.location.href='Proveedores.php  '">Añadir Proveedor</button>
             <i class="fas fa-truck fa-2x" style="margin-top: 10px;"></i>
         </div>
     </div>

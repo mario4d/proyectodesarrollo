@@ -1,24 +1,37 @@
 <?php
-$servername = "localhost";
-$username = "userdb";
-$password = "passworddb";
-$database = "proyecto_db";
-$conn = new mysqli($servername, $username, $password, $database);
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+
+include 'ConexionS.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $ID_Proveedor = $_POST['ID_Proveedor'];
+    $Nombre_Proveedor = $_POST['Nombre_Proveedor'];
+    $Contacto = $_POST['Correo'];
+    $Direccion = $_POST['Direccion'];
+    $Telefono = $_POST['Telefono'];
+
+    $sql = "INSERT INTO Proveedores (ID_Proveedor, Nombre_Proveedor, Contacto, Direccion, Telefono)
+            VALUES (:id_proveedor, :nombre_proveedor, :correo_proveedor, :direccion_proveedor, :telefono_proveedor)";
+    $stmt = $pdo ->prepare($sql);
+
+    $stmt->bindParam(':id_proveedor', $ID_Proveedor);
+    $stmt->bindParam(':nombre_proveedor', $Nombre_Proveedor);
+    $stmt->bindParam(':correo_proveedor', $Contacto);
+    $stmt->bindParam(':direccion_proveedor', $Direccion);
+    $stmt->bindParam(':telefono_proveedor', $Telefono);
+
+
+    try {
+        if ($stmt->execute()) {
+            header("Location: Proveedores.php?mensaje=success");
+            exit();
+        } else {
+            header("Location: Proveedores.php?mensaje=error");
+            exit();
+        }
+    } catch (PDOException $e) {
+        header("Location: Proveedores.php?mensaje=error&detalles=" . urlencode($e->getMessage()));
+        exit();
+    }
+
 }
-$ID_Proveedor = $_POST['ID_Proveedor'];
-$Nombre_Proveedor = $_POST['Nombre_Proveedor'];
-$Contacto = $_POST['Contacto'];
-$Direccion = $_POST['Direccion'];
-$Telefono = $_POST['Telefono'];
-$stmt = $conn->prepare("INSERT INTO Proveedores (ID_Proveedor, Nombre_Proveedor, Contacto, Direccion, Telefono) VALUES (ID_Proveedor, Nombre_Proveedor, Contacto, Direccion, Telefono)");
-$stmt->bind_param("si", $ID_Proveedor, $Nombre_Proveedor, $Contacto, $Direccion; $Telefono); // "si" significa string y integer
-if ($stmt->execute()) {
-    echo "Nuevo registro creado exitosamente";
-} else {
-    echo "Error: " . $stmt->error;
-}
-$stmt->close();
-$conn->close();
 ?>

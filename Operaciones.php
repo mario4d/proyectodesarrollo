@@ -1,6 +1,6 @@
 <?php
 
-include('Conexion.php'); // Incluir la conexión a la base de datos
+include('ConexionS.php'); // Incluir la conexión a la base de datos
 
 // Consulta para contar el número de filas en la tabla de productos
 $query = "SELECT COUNT(*) as total_filas FROM productos";
