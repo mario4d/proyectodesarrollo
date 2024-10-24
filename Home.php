@@ -17,14 +17,14 @@
         .navbar {
             background-color: #002147;
             color: white;
-            padding: 20px; /* Aumento del padding */
+            padding: 20px;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            font-size: 18px; /* Aumento del tamaño de fuente */
+            font-size: 18px;
         }
         .navbar a {
             color: white;
-            margin: 0 30px; /* Aumento del espaciado entre enlaces */
+            margin: 0 30px; 
             text-decoration: none;
             font-weight: bold;
         }
@@ -39,11 +39,12 @@
         .container {
             display: flex;
             flex-grow: 1;
-            justify-content: center; /* Centrar horizontalmente */
-            align-items: center; /* Centrar verticalmente */
-            flex-wrap: wrap; /* Permitir que los elementos se ajusten */
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
             padding: 20px;
         }
+
         .cuadro {
             box-sizing: border-box;
             border: 1px solid #ccc;
@@ -52,17 +53,27 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 600px; /* Aumento del ancho de los cuadros */
-            height: 350px; /* Aumento de la altura de los cuadros */
-            padding: 20px;
-            margin: 20px; /* Espaciado entre cuadros */
+            width: 100%;
+            max-width: 600px; 
+            height: 300px; 
+            padding: 30px; 
+            margin: 20px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
         }
+
         .cuadro:hover {
-            transform: scale(1.02);
+            transform: scale(1.05); 
         }
+
+        @media (max-width: 768px) {
+            .cuadro {
+                max-width: 90%; 
+            }
+        }
+
+
         h2 {
             margin: 0;
             color: #002147;

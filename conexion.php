@@ -1,21 +1,13 @@
 <?php
+$host = "localhost";
+$username = "userdb";
+$password = "passworddb";
+$dbname = "proyecto_db";
 
-$host="localhost";
-$user="userdb";
-$pass="passworddb";
-$db="proyecto_db";
-
-
-$est= mysqli_connect($host,$user,$pass,$db);
-
-
-
-if($est->connect_errno){
-    die(utf8_decode("Fallo la coneccion a MYSQL: ".$est->connect_errno."".mysqli_connect_error()));
-    
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "Error en la conexión: " . $e->getMessage();
+    exit();
 }
-$est->set_charset('utf8');
-
-
-
-?>
