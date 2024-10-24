@@ -18,7 +18,7 @@ include('Operaciones.php');
 <body>
 <nav>
         <ul>
-            <li><a href="#"> Compra produc </a></li>
+            <li><a href="#"> Compra producto </a></li>
         </ul>
     </nav>
 
@@ -57,6 +57,7 @@ include('Operaciones.php');
             <div class="text-center">
                 <button type="submit" class="btn btn-primary" name="agregar">Guardar</button>
                 <button type="reset" class="btn btn-secondary">Cancelar</button>
+                <button type="button" onclick="window.location.href='Home.php'">Regresar</button>
             </div>
         </form>
 
