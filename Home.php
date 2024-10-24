@@ -115,7 +115,7 @@
         <div class="cuadro">
             <h2>Realizar Compra</h2>
             <p></p>
-            <button>Realizar Compra</button>
+            <button onclick="window.location.href='compras/p_compras.php'">Realizar Compra</button>
             <i class="fas fa-shopping-cart fa-2x" style="margin-top: 10px;"></i>
         </div>
 
