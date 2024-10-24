@@ -149,7 +149,7 @@ try {
                 </select>
 
                 <label>Estado de Solicitud</label>
-                <input type="text" value="Pendiente" name="estado_solicitud" readonly>
+                <input type="text" value="Enviado" name="estado_solicitud" readonly>
 
                 <div class="buttons-container">
                     <button type="button" onclick="window.location.href='Home.php'">Regresar</button>
