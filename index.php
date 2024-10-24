@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+<?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+include('conexion.php'); 
+include('Operaciones.php'); 
+
+?>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -7,12 +16,12 @@
     <link rel="stylesheet" href="css/estilo.css"> 
 </head>
 <body>
-    <nav>
+<nav>
         <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Acerca de</a></li>
-            <li><a href="#">Servicios</a></li>
-            <li><a href="#">Contacto</a></li>
+            <li><a href="#"> Compra producto </a></li>
+            <li><a href="#">Solicitud</a></li>
+            <li><a href="#">Añadir producto</a></li>
+            <li><a href="#">Proveedores</a></li>
         </ul>
     </nav>
 
@@ -22,31 +31,31 @@
         <form action="Operaciones.php" method="POST"> 
             <div class="form-group">
                 <label for="codigo">Código</label>
-                <input type="number" id="codigo" name="codigo" placeholder="Ingrese el ID del producto" maxlength="7" required>
+                <input type="number" id="codigo" name="codigo" value="<?php echo $nuevo_codigo; ?>" readonly required>
             </div>
             <div class="form-group">
                 <label for="nombre">Nombre del Producto</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre del producto" required>
+                <input type="text" id="nombre" name="nombre" maxlength="20" placeholder="Ingrese el nombre del producto" required>
             </div>
             <div class="form-group">
                 <label for="descripcion">Descripción del producto</label>
-                <input type="text" id="descripcion" name="descripcion" placeholder="Ingrese los detalles del producto" required>
+                <input type="text" id="descripcion" name="descripcion" maxlength="20" placeholder="Ingrese los detalles del producto" required>
             </div>
             <div class="form-group">
                 <label for="precio">Precio del producto</label>
-                <input type="number" id="precio" name="precio" placeholder="Ingrese el precio" required>
+                <input type="text" id="precio" name="precio"  placeholder="Ingrese el precio" required oninput="validarNumero(this)">
             </div>
             <div class="form-group">
                 <label for="stock">Stock</label>
-                <input type="text" id="stock" name="stock" placeholder="Ingrese el stock disponible" required>
+                <input type="text" id="stock" name="stock" placeholder="Ingrese el stock disponible" required oninput="validarNumero(this)">
             </div>
             <div class="form-group">
                 <label for="marca">Marca</label>
-                <input type="text" id="marca" name="marca" placeholder="Ingrese la marca" required>
+                <input type="text" id="marca" name="marca" maxlength="20" placeholder="Ingrese la marca" required>
             </div>
             <div class="form-group">
                 <label for="modelo">Modelo</label>
-                <input type="text" id="modelo" name="modelo" placeholder="Ingrese el modelo" required>
+                <input type="text" id="modelo" name="modelo" maxlength="20" placeholder="Ingrese el modelo" required>
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary" name="agregar">Guardar</button>
@@ -54,49 +63,19 @@
             </div>
         </form>
 
-        <br>
-        <h2 class="text-center">Productos añadidos</h2>
-
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Precio</th>
-                        <th>Stock</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    session_start();
-                    if (!empty($_SESSION['productos'])) {
-                        foreach ($_SESSION['productos'] as $indice => $producto) {
-                            echo "<tr>
-                                    <td>{$producto['codigo']}</td>
-                                    <td>{$producto['nombre']}</td>
-                                    <td>{$producto['descripcion']}</td>
-                                    <td>{$producto['precio']}</td>
-                                    <td>{$producto['stock']}</td>
-                                    <td>{$producto['marca']}</td>
-                                    <td>{$producto['modelo']}</td>
-                                    <td>
-                                        <form action='Operaciones.php' method='POST' style='display:inline;'>
-                                            <input type='hidden' name='indice' value='{$indice}'>
-                                            <input type='submit' name='eliminar' class='btn btn-danger' value='Eliminar'>
-                                        </form>
-                                    </td>
-                                </tr>";
-                        }
-                    }
-                    ?>
-                </tbody>
-            </table>
         </div>
     </div>
 </body>
 </html>
+
+<script>
+        function validarNumero(input) {
+            // Expresión regular que permite hasta 6 dígitos antes del punto y 2 dígitos después del punto
+            const regex = /^\d{0,6}(\.\d{0,2})?$/;
+
+            // Si el valor del input no cumple con el patrón, se limpia
+            if (!regex.test(input.value)) {
+                input.value = input.value.slice(0, -1);  // Elimina el último carácter ingresado
+            }
+        }
+    </script>

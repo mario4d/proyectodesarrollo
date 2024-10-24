@@ -1,51 +1,45 @@
 <?php
-session_start(); 
+
+include('conexion.php'); // Incluir la conexión a la base de datos
+
+
+$query = "SELECT COUNT(*) as total_filas FROM productos";
+$result = $est->query($query);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $nuevo_codigo = $row['total_filas'] + 1;
+} else {
+    // Si no hay productos, el primer código será 1
+    $nuevo_codigo = 1;
+}
+
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    if (isset($_POST['agregar'])) {
-        $codigo = $_POST['codigo'] ?? '';
-        $nombre = $_POST['nombre'] ?? '';
-        $descripcion = $_POST['descripcion'] ?? '';
-        $precio = $_POST['precio'] ?? '';
-        $stock = $_POST['stock'] ?? '';
-        $marca = $_POST['marca'] ?? '';
-        $modelo = $_POST['modelo'] ?? '';
 
-       
-        $producto = array(
-            "codigo" => $codigo,
-            "nombre" => $nombre,
-            "descripcion" => $descripcion,
-            "precio" => $precio,
-            "stock" => $stock,
-            "marca" => $marca,
-            "modelo" => $modelo,
-        );
+    // Recoger los valores del formulario de manera segura
+    $codigo = isset($_POST['codigo']) ? $_POST['codigo'] : '';
+    $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+    $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
+    $precio = isset($_POST['precio']) ? $_POST['precio'] : '';
+    $stock = isset($_POST['stock']) ? $_POST['stock'] : '';
+    $marca = isset($_POST['marca']) ? $_POST['marca'] : '';
+    $modelo = isset($_POST['modelo']) ? $_POST['modelo'] : '';
 
-        if (!isset($_SESSION['productos'])) {
-            $_SESSION['productos'] = array();
-        }
+    // Consulta SQL para insertar el producto
+    $enviar = "INSERT INTO productos (Codigo, Nombre_Producto, Marca_Producto, Modelo_Producto, Descripcion_Producto, Precio_Producto, Stock) 
+               VALUES ('$codigo', '$nombre', '$descripcion', '$precio', '$stock', '$marca', '$modelo')";
 
-        $_SESSION['productos'][] = $producto;
-
-        
-        header("Location: index.php");
-        exit();
-    }
-
-    
-    if (isset($_POST['eliminar'])) {
-        $indice = $_POST['indice'] ?? -1;
-
-        
-        if ($indice >= 0 && $indice < count($_SESSION['productos'])) {
-            unset($_SESSION['productos'][$indice]); 
-            $_SESSION['productos'] = array_values($_SESSION['productos']); 
-        }
-
-        header("Location: index.php");
-        exit();
+    // Ejecutar la consulta y verificar si se ha insertado correctamente
+    if ($est->query($enviar) === TRUE) {
+        // Si la inserción es exitosa, redirigir a la página principal
+        header('Location: index.php');
+        exit;
+    } else {
+        // Mostrar mensaje de error si ocurre un problema
+        echo "Error al registrar el producto en la base de datos: " . $est->error;
     }
 }
+
 ?>
