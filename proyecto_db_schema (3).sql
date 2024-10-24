@@ -37,7 +37,11 @@ CREATE TABLE departamentos (
     Jefe_Departamento VARCHAR(20)
 );
 INSERT INTO departamentos (Nombre_Departamento, Especificacion_Departamento, Ubicacion_Departamento, Jefe_Departamento)
-VALUES ('Tecnologia', 'Departamento de Tecnologia', 'Edificio A - Piso 2', '8-1009-525');
+VALUES ('Tecnologia', 'Departamento de Tecnologia', 'Edificio A - Piso 2', '8-1009-525'),
+('Contabilidad', 'Departamento de Contabilidad', 'Edificio B - Piso 3', 'Ram Singh'),
+('Bienes Patrimoniales', 'Departamento de Bienes Patrimoniales', 'Edificio C - Piso 1', 'Josue Estrada'),
+('Recursos Humanos', 'Departamento de Recursos Humanos', 'Edificio D - Piso 2', 'Alberto Rangel'),
+('Compra', 'Departamento de Compras', 'Edificio E - Piso 4', 'Mario Duque');
 
 
 -- Crear tabla productos
@@ -47,9 +51,10 @@ CREATE TABLE productos (
     Descripcion_Producto VARCHAR(255),
     Precio_Producto DECIMAL(10,2),
     Stock Int,
-    Depreciacion_Producto DECIMAL(10,2),
-    Departamento_ID INT,
-    FOREIGN KEY (Departamento_ID) REFERENCES departamentos(ID_Departamento)
+    Marca VARCHAR(100),
+    Modelo VARCHAR(100),
+    ID_Proveedor INT,
+    FOREIGN KEY (ID_Proveedor) REFERENCES proveedores(ID_Proveedor)
 );
 -- Tabla provincia
 CREATE TABLE `provincia` (

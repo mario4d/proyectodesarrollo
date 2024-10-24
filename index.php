@@ -18,10 +18,7 @@ include('Operaciones.php');
 <body>
 <nav>
         <ul>
-            <li><a href="#"> Compra producto </a></li>
-            <li><a href="#">Solicitud</a></li>
-            <li><a href="#">Añadir producto</a></li>
-            <li><a href="#">Proveedores</a></li>
+            <li><a href="#"> Compra produc </a></li>
         </ul>
     </nav>
 
