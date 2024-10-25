@@ -14,10 +14,6 @@
 <body>
   <div class="navbar">
     <span>Departamento de Compra</span>
-    <a href="#">Inicio</a>
-    <a href="#">Acerca de</a>
-    <a href="#">Servicios</a>
-    <a href="#">Contacto</a>
   </div>
 
   <form class="formulario">
