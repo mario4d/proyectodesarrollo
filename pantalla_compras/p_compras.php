@@ -14,6 +14,7 @@
 <body>
   <div class="navbar">
     <span>Departamento de Compra</span>
+    <button class="navButton" onclick="window.location.href='../Home.php'">Inicio</button>
   </div>
 
   <form class="formulario">

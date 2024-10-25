@@ -90,7 +90,8 @@ document.addEventListener("DOMContentLoaded", function() {
             let precioProd = document.getElementById('inPrecioProducto').value;
             let proveedorProd = document.getElementById('proveedorProducto').value;
             let idDepto = idDep;
-            let detalleCompra = document.getElementById('detalleCompra').value;
+
+            let detalleCompra = document.getElementById('detalleCompra').value + ', ' + document.getElementById('nombreProducto').value;
             let idSolici = item;
             let totalProd = document.getElementById('totalCompra').value;
         
@@ -103,15 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
             data.append('idSolicitud', idSolici);
             data.append('totalProducto', totalProd);
 
-            console.log(cantidadProd);
-            console.log(precioProd);
-            console.log(proveedorProd);
-            console.log(idDepto);
             console.log(detalleCompra);
-            console.log(idSolici);
-            console.log(totalProd);
-
-            console.log(data);
             
 
         
@@ -119,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 .then(function(res) { return res.json } )
                 .then(function(data) {
                     console.log(data);
+                    location.reload();
                 })
                 .catch(error => { console.error('hubo un error: ', error) });
         });
