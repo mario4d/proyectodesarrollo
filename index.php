@@ -32,7 +32,7 @@ include('Operaciones.php'); // Aseg√∫rate de que Operaciones.php se incluya aqu√
             </div>
             <div class="form-group">
                 <label for="stock">Stock</label>
-                <input type="text" id="stock" name="stock" placeholder="Ingrese el stock disponible" required oninput="validarNumero(this)">
+                <input type="text" id="stock" name="stock" placeholder="Ingrese el stock disponible" maxlength="7" required oninput="validarEntrada(this)">
             </div>
             <div class="form-group">
                 <label for="marca">Marca</label>
@@ -45,7 +45,7 @@ include('Operaciones.php'); // Aseg√∫rate de que Operaciones.php se incluya aqu√
             <div class="text-center">
                 <button type="submit" class="btn btn-primary" name="agregar">Guardar</button>
                 <button type="reset" class="btn btn-secondary">Cancelar</button>
-                <button type="button" onclick="window.location.href='Home.php'">Regresar</button>
+                <button type="button" class="btn btn-regresar" onclick="window.location.href='/departamento/Home.php'">Regresar</button>
             </div>
         </form>
     </div>
@@ -57,6 +57,7 @@ include('Operaciones.php'); // Aseg√∫rate de que Operaciones.php se incluya aqu√
                 <tr>
                     <th>Nombre | Marca | Modelo</th>
                     <th>Precio del Producto</th>
+                    <th>Cantidad</th> <!-- Nueva columna para la cantidad -->
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -64,9 +65,8 @@ include('Operaciones.php'); // Aseg√∫rate de que Operaciones.php se incluya aqu√
                 <?php while ($row = $productosPendientes->fetch(PDO::FETCH_ASSOC)) { ?>
                     <tr>
                         <td><?php echo htmlspecialchars($row['Detalle_Producto']); ?></td>
-                        <td>
-                            <?php echo htmlspecialchars($row['Precio_Producto']); ?>
-                        </td>
+                        <td><?php echo htmlspecialchars($row['Precio_Producto']); ?></td>
+                        <td><?php echo htmlspecialchars($row['Cantidad_Producto']); ?></td> <!-- Mostrar la cantidad -->
                         <td>
                             <form action="Operaciones.php" method="POST" style="display:inline;">
                                 <input type="hidden" name="id_solicitud" value="<?php echo htmlspecialchars($row['ID_Solicitud']); ?>">
@@ -87,6 +87,10 @@ include('Operaciones.php'); // Aseg√∫rate de que Operaciones.php se incluya aqu√
         if (!regex.test(input.value)) {
             input.value = input.value.slice(0, -1);  // Elimina el √∫ltimo car√°cter ingresado
         }
+    }
+    function validarEntrada(input) {
+        // Elimina caracteres no num√©ricos
+        input.value = input.value.replace(/[^0-9]/g, '');
     }
 </script>
 
