@@ -1,6 +1,6 @@
 <?php 
 include('ConexionS.php');
-include('Operaciones.php'); // Asegúrate de que Operaciones.php se incluya aquí para obtener $nuevo_codigo y $productosPendientes
+include('Operaciones.php'); 
 ?>
 <html lang="es">
 <head>
@@ -55,7 +55,7 @@ include('Operaciones.php'); // Asegúrate de que Operaciones.php se incluya aqu�
         <table>
             <thead>
                 <tr>
-                    <th>Nombre | Marca | Modelo</th>
+                    <th>marca | modelo | nombre</th>
                     <th>Precio del Producto</th>
                     <th>Cantidad</th> <!-- Nueva columna para la cantidad -->
                     <th>Acciones</th>

@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <input type="text" id="nombreProducto" required>
                 
                 <label for="inPrecioProducto">Precio</label>
-                <input type="text" id="inPrecioProducto">
+                <input type="text" id="inPrecioProducto" oninput="validarNumero(this)">
                 
                 <label for="detalleCompra">Detalle de compra (Marca, Modelo)</label>
                 <input type="text" id="detalleCompra">
@@ -76,7 +76,9 @@ document.addEventListener("DOMContentLoaded", function() {
             const precioUnitario = parseFloat(document.getElementById('inPrecioProducto').value);
             const cantidadProducto = parseInt(cant);
             const totalFinal = precioUnitario * cantidadProducto;
-            total.value = totalFinal.toFixed(2); // Redondeo a dos decimales si es necesario
+            const Impuesto = totalFinal * 0.07;
+            const FinalFinal = Impuesto + totalFinal
+            total.value = FinalFinal.toFixed(2); // Redondeo a dos decimales si es necesario
         })
         
         
@@ -118,3 +120,16 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+
+function validarNumero(input) {
+    const regex = /^\d{0,6}(\.\d{0,2})?$/;
+
+    if (!regex.test(input.value)) {
+        input.value = input.value.slice(0, -1);  // Elimina el último carácter ingresado
+    }
+}
+function validarEntrada(input) {
+    // Elimina caracteres no numéricos
+    input.value = input.value.replace(/[^0-9]/g, '');
+}

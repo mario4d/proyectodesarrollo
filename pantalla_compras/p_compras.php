@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- ESTILO PRINCIPAL -->
+  
   <link rel="stylesheet" href="style.css">
 
   <title>Compra</title>
@@ -15,6 +15,7 @@
   <div class="navbar">
     <span>Departamento de Compra</span>
     <button class="navButton" onclick="window.location.href='../Home.php'">Inicio</button>
+    <button class="navButton" onclick="window.location.href='../Proveedores.php'">Proveedor</button>
   </div>
 
   <form class="formulario">
@@ -22,7 +23,7 @@
     <div class="listaSolicitudes sides">
       <h2>Solicitudes recibidas</h2>
       <ul id="lista">
-        <!-- Los ítems se generarán aquí -->
+        
       </ul>
     </div>
 
