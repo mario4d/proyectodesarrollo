@@ -101,10 +101,6 @@ try {
 
     <div class="navbar">
         <span>Departamento de Compra</span>
-        <a href="#">Inicio</a>
-        <a href="#">Acerca de</a>
-        <a href="#">Servicios</a>
-        <a href="#">Contacto</a>
     </div>
 
     <div class="container">
@@ -149,7 +145,7 @@ try {
                 </select>
 
                 <label>Estado de Solicitud</label>
-                <input type="text" value="Pendiente" name="estado_solicitud" readonly>
+                <input type="text" value="Enviado" name="estado_solicitud" readonly>
 
                 <div class="buttons-container">
                     <button type="button" onclick="window.location.href='Home.php'">Regresar</button>

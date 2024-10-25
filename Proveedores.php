@@ -94,10 +94,6 @@ try {
 
     <div class="navbar">
         <span>Departamento de compra</span>
-        <a href="#">Inicio</a>
-        <a href="#">Proveedores</a>
-        <a href="#">Productos</a>
-        <a href="#">Contacto</a>
     </div>
 
     <div class="container">

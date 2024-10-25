@@ -1,12 +1,6 @@
-<?php
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-include('ConexionS.php'); 
-include('Operaciones.php'); 
-
+<?php 
+include('ConexionS.php');
+include('Operaciones.php'); // Asegúrate de que Operaciones.php se incluya aquí para obtener $nuevo_codigo y $productosPendientes
 ?>
 <html lang="es">
 <head>
@@ -16,15 +10,9 @@ include('Operaciones.php');
     <link rel="stylesheet" href="css/estilo.css"> 
 </head>
 <body>
-<nav>
-        <ul>
-            <li><a href="#"> Compra producto </a></li>
-        </ul>
-    </nav>
-
-    <div class="container">
+<div class="container">
+    <div class="left-side">
         <h2>Añadir producto</h2>
-        
         <form action="Operaciones.php" method="POST"> 
             <div class="form-group">
                 <label for="codigo">Código</label>
@@ -36,11 +24,11 @@ include('Operaciones.php');
             </div>
             <div class="form-group">
                 <label for="descripcion">Descripción del producto</label>
-                <input type="text" id="descripcion" name="descripcion" maxlength="20" placeholder="Ingrese los detalles del producto" required>
+                <input type="text" id="descripcion" name="descripcion" maxlength="70" placeholder="Ingrese los detalles del producto" required>
             </div>
             <div class="form-group">
                 <label for="precio">Precio del producto</label>
-                <input type="text" id="precio" name="precio"  placeholder="Ingrese el precio" required oninput="validarNumero(this)">
+                <input type="text" id="precio" name="precio" placeholder="Ingrese el precio" required oninput="validarNumero(this)">
             </div>
             <div class="form-group">
                 <label for="stock">Stock</label>
@@ -60,20 +48,47 @@ include('Operaciones.php');
                 <button type="button" onclick="window.location.href='Home.php'">Regresar</button>
             </div>
         </form>
-
-        </div>
     </div>
-</body>
-</html>
+
+    <div class="right-side">
+        <h2>Productos Completados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre | Marca | Modelo</th>
+                    <th>Precio del Producto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = $productosPendientes->fetch(PDO::FETCH_ASSOC)) { ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($row['Detalle_Producto']); ?></td>
+                        <td>
+                            <?php echo htmlspecialchars($row['Precio_Producto']); ?>
+                        </td>
+                        <td>
+                            <form action="Operaciones.php" method="POST" style="display:inline;">
+                                <input type="hidden" name="id_solicitud" value="<?php echo htmlspecialchars($row['ID_Solicitud']); ?>">
+                                <button type="submit" name="actualizar_estado" class="btn btn-success">Actualizar Estado</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <script>
-        function validarNumero(input) {
-            // Expresión regular que permite hasta 6 dígitos antes del punto y 2 dígitos después del punto
-            const regex = /^\d{0,6}(\.\d{0,2})?$/;
+    function validarNumero(input) {
+        const regex = /^\d{0,6}(\.\d{0,2})?$/;
 
-            // Si el valor del input no cumple con el patrón, se limpia
-            if (!regex.test(input.value)) {
-                input.value = input.value.slice(0, -1);  // Elimina el último carácter ingresado
-            }
+        if (!regex.test(input.value)) {
+            input.value = input.value.slice(0, -1);  // Elimina el último carácter ingresado
         }
-    </script>
+    }
+</script>
+
+</body>
+</html>
