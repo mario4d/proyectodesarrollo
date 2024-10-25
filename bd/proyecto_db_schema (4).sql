@@ -5,11 +5,10 @@ USE proyecto_db;
 -- Crear tabla metodos_pago_cobro
 CREATE TABLE metodos_pago_cobro (
     ID_Metodo INT PRIMARY KEY AUTO_INCREMENT,
-    Tipo ENUM('Pago', 'Cobro') NOT NULL,
     Nombre ENUM('Efectivo', 'Cheque') NOT NULL
 );
-INSERT INTO metodos_pago_cobro (Tipo, Nombre)
-VALUES ('Pago', 'Efectivo'),('Pago', 'Cheque'),('Cobro', 'Efectivo'),('Cobro', 'Cheque');
+INSERT INTO metodos_pago_cobro ( Nombre)
+VALUES ('Efectivo'),('Cheque');
 
 -- Crear tabla clientes
 CREATE TABLE clientes (
@@ -51,6 +50,7 @@ CREATE TABLE productos (
     Descripcion_Producto VARCHAR(255),
     Precio_Producto DECIMAL(10,2),
     Stock Int,
+    motivo_Solicitud VARCHAR (255),
     Marca VARCHAR(100),
     Modelo VARCHAR(100),
     ID_Proveedor INT,
@@ -62,28 +62,34 @@ CREATE TABLE `provincia` (
   `nombre_provincia` varchar(50) NOT NULL,
   PRIMARY KEY (`codigo_provincia`)
 ) ;
-
+ALTER TABLE `provincia`
+  ADD UNIQUE KEY `codigo_provincia` (`codigo_provincia`);
+COMMIT;
 -- Tabla distrito
 CREATE TABLE `distrito` (
   `codigo_provincia` varchar(2) NOT NULL,
   `codigo_distrito` varchar(4) NOT NULL,
   `codigo` varchar(2) NOT NULL,
   `nombre_distrito` varchar(150) NOT NULL,
-  PRIMARY KEY (`codigo_distrito`),
-  FOREIGN KEY (`codigo_provincia`) REFERENCES `provincia`(`codigo_provincia`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`codigo_distrito`)
 );
+ALTER TABLE `distrito`
+  ADD UNIQUE KEY `llave` (`codigo_distrito`);
+COMMIT;
+
 
 -- Tabla corregimiento
 CREATE TABLE `corregimiento` (
   `codigo_provincia` varchar(2) NOT NULL,
   `codigo_distrito` varchar(4) NOT NULL,
+  `codigo` varchar(2) NOT NULL,
   `codigo_corregimiento` varchar(6) NOT NULL,
   `nombre_corregimiento` varchar(150) NOT NULL,
-  PRIMARY KEY (`codigo_corregimiento`),
-  FOREIGN KEY (`codigo_provincia`) REFERENCES `provincia`(`codigo_provincia`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`codigo_distrito`) REFERENCES `distrito`(`codigo_distrito`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`codigo_corregimiento`)
 ) ;
-
+ALTER TABLE `corregimiento`
+  ADD UNIQUE KEY `unico` (`codigo_corregimiento`);
+COMMIT;
 -- Tabla empleados
 CREATE TABLE empleados (
     Cedula VARCHAR(20) PRIMARY KEY,
@@ -95,21 +101,17 @@ CREATE TABLE empleados (
     Usa_AC TINYINT,
     Estado_Civil TINYINT,
     Apellido_Casada VARCHAR(50),
-    Turno_Hora VARCHAR(15),
     Departamento_ID INT,
     Correo VARCHAR(100),
     Telefono VARCHAR(15),
     codigo_provincia VARCHAR(2),
     codigo_distrito VARCHAR(4),
     codigo_corregimiento VARCHAR(6),
-    FOREIGN KEY (Departamento_ID) REFERENCES departamentos(ID_Departamento),
-    FOREIGN KEY (codigo_provincia) REFERENCES provincia(codigo_provincia) ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (codigo_distrito) REFERENCES distrito(codigo_distrito) ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (codigo_corregimiento) REFERENCES corregimiento(codigo_corregimiento) ON DELETE SET NULL ON UPDATE CASCADE
+    FOREIGN KEY (Departamento_ID) REFERENCES departamentos(ID_Departamento)
 );
 INSERT INTO empleados (
     Cedula, Nombre, Segundo_Nombre, Apellido, Segundo_Apellido, 
-    Genero, Usa_AC, Estado_Civil, Apellido_Casada, Turno_Hora, 
+    Genero, Usa_AC, Estado_Civil, Apellido_Casada, 
     Departamento_ID, Correo, Telefono, codigo_provincia, codigo_distrito, codigo_corregimiento
 ) 
 VALUES (
@@ -118,7 +120,6 @@ VALUES (
     0, -- Usa_AC: 0 (no tiene apellido de casado)
     0, -- Estado_Civil: no se especificó
     NULL, -- Apellido_Casada: no aplica
-    NULL, -- Turno_Hora: no se especificó
     (SELECT ID_Departamento FROM departamentos WHERE Nombre_Departamento = 'Tecnologia'), 
     'brayan.rodriguez2@utp.ac.pa', 
     '6444-1636', -- Teléfono
@@ -223,19 +224,7 @@ CREATE TABLE registro_ingreso_gasto (
     FOREIGN KEY (ID_Cheque) REFERENCES cheques(ID_Cheque)
 );
 
--- Crear tabla compra_productos
-CREATE TABLE compra_productos (
-    ID_Compra INT PRIMARY KEY AUTO_INCREMENT,
-    Codigo_Producto INT,
-    Cantidad_Producto INT,
-    Precio_Producto DECIMAL(10,2),
-    Proveedor_ID INT,
-    Departamento_ID INT,
-    Detalle_Producto TEXT,
-    FOREIGN KEY (Codigo_Producto) REFERENCES productos(Codigo),
-    FOREIGN KEY (Proveedor_ID) REFERENCES proveedores(ID_Proveedor),
-    FOREIGN KEY (Departamento_ID) REFERENCES departamentos(ID_Departamento)
-);
+
 
 -- Crear tabla bienes_patrimoniales
 CREATE TABLE bienes_patrimoniales (
@@ -246,8 +235,9 @@ CREATE TABLE bienes_patrimoniales (
     Depreciacion DECIMAL(10,2),
     Descripcion TEXT,
     Marca TEXT,
+    Serie INT,
+    Placa INT,
     Modelo TEXT,
-    Comentarios TEXT,
     fecha DATETIME,
     FOREIGN KEY (Codigo_Producto) REFERENCES productos(Codigo),
     FOREIGN KEY (Proveedor_ID) REFERENCES proveedores(ID_Proveedor),
@@ -267,6 +257,7 @@ CREATE TABLE planilla (
     Impuesto_Renta FLOAT,
     Descuento_1 FLOAT,
     Descuento_2 FLOAT,
+    Descuento_3 FLOAT,
     Deducciones FLOAT,
     Salario_Neto FLOAT,
     FOREIGN KEY (Cedula_Empleado) REFERENCES empleados(Cedula)
@@ -297,13 +288,26 @@ CREATE TABLE Solicitudes_Producto (
     Descripcion_Solicitud VARCHAR(255),
     ID_Producto INT,
     Cantidad_Solicitada INT,
-    Razon_Solicitud VARCHAR (255),
+    motivo_Solicitud VARCHAR (255),
     ID_Departamento INT,
-    Estado_Solicitud ENUM('Pendiente', 'Completada', 'Cancelada') NOT NULL,
+    Estado_Solicitud ENUM('Pendiente', 'Completada', 'Cancelada','Enviado') NOT NULL,
     FOREIGN KEY (ID_Producto) REFERENCES productos(Codigo),
     FOREIGN KEY (ID_Departamento) REFERENCES departamentos(ID_Departamento)
 );
-
+-- Crear tabla compra_productos
+CREATE TABLE compra_productos (
+    ID_Compra INT PRIMARY KEY AUTO_INCREMENT,
+    Cantidad_Producto INT,
+    Precio_Producto DECIMAL(10,2),
+    Proveedor_ID INT,
+    Departamento_ID INT,
+    Detalle_Producto TEXT,
+    ID_Solicitud INT,
+    Total_Producto INT,
+    FOREIGN KEY (Proveedor_ID) REFERENCES proveedores(ID_Proveedor),
+    FOREIGN KEY (Departamento_ID) REFERENCES departamentos(ID_Departamento),
+    FOREIGN KEY (ID_Solicitud) REFERENCES Solicitudes_Producto(ID_Solicitud)
+);
 -- Crear tabla depreciacion
 CREATE TABLE depreciacion (
     ID INT PRIMARY KEY AUTO_INCREMENT,
