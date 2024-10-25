@@ -6,7 +6,7 @@ function obtenerProductosPendientes($pdo) {
     $query = "SELECT cp.Detalle_Producto, cp.Precio_Producto, sp.ID_Solicitud
               FROM compra_productos cp
               JOIN solicitudes_producto sp ON cp.ID_Solicitud = sp.ID_Solicitud
-              WHERE sp.Estado_Solicitud = 'Pendiente'";
+              WHERE sp.Estado_Solicitud = 'Enviado'";
     return $pdo->query($query);
 }
 
