@@ -45,7 +45,7 @@ include('Operaciones.php'); // Aseg√∫rate de que Operaciones.php se incluya aqu√
             <div class="text-center">
                 <button type="submit" class="btn btn-primary" name="agregar">Guardar</button>
                 <button type="reset" class="btn btn-secondary">Cancelar</button>
-                <button type="button" class="btn btn-regresar" onclick="window.location.href='/departamento/Home.php'">Regresar</button>
+                <button type="button" class="btn btn-regresar" onclick="window.location.href='Home.php'">Regresar</button>
             </div>
         </form>
     </div>
