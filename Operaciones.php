@@ -1,7 +1,7 @@
 <?php
 include('ConexionS.php');
 
-// Función para obtener productos pendientes
+
 function obtenerProductosPendientes($pdo) {
     $query = "SELECT cp.Detalle_Producto, cp.Precio_Producto, cp.Cantidad_Producto, sp.ID_Solicitud, cp.Proveedor_ID
               FROM compra_productos cp
@@ -10,7 +10,6 @@ function obtenerProductosPendientes($pdo) {
     return $pdo->query($query);
 }
 
-// Contar el número de filas en la tabla productos para determinar el nuevo código
 $query = "SELECT COUNT(*) as total_filas FROM productos";
 $result = $pdo->query($query);
 $row = $result->fetch(PDO::FETCH_ASSOC);
@@ -21,11 +20,11 @@ if ($row['total_filas'] > 0) {
     $nuevo_codigo = 1; 
 }
 
-// Obtener productos pendientes
+
 $productosPendientes = obtenerProductosPendientes($pdo); 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Agregar un nuevo producto
+    
     if (isset($_POST['agregar'])) {
         $codigo = $nuevo_codigo;
         $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
@@ -35,16 +34,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $marca = isset($_POST['marca']) ? $_POST['marca'] : '';
         $modelo = isset($_POST['modelo']) ? $_POST['modelo'] : '';
         
-        // Obtener el Proveedor_ID de la consulta
-        $proveedor_id = null; // Inicializa la variable
+    
+        $proveedor_id = null; 
 
-        // Si hay productos pendientes, obtener el Proveedor_ID del primero
+        
         if ($productosPendientes->rowCount() > 0) {
             $productoPendiente = $productosPendientes->fetch(PDO::FETCH_ASSOC);
-            $proveedor_id = $productoPendiente['Proveedor_ID']; // Guarda el Proveedor_ID
+            $proveedor_id = $productoPendiente['Proveedor_ID'];
         }
 
-        // Inserción en la tabla productos, incluyendo ID_Proveedor
+        
         $enviar = "INSERT INTO productos (Codigo, Nombre_Producto, Descripcion_Producto, Precio_Producto, Stock, Marca, Modelo, ID_Proveedor) 
                    VALUES (:codigo, :nombre, :descripcion, :precio, :stock, :marca, :modelo, :proveedor_id)";
 
@@ -58,9 +57,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':stock' => $stock,
             ':marca' => $marca,
             ':modelo' => $modelo,
-            ':proveedor_id' => $proveedor_id // Inserta el Proveedor_ID
+            ':proveedor_id' => $proveedor_id 
         ])) {
-            header('Location: index.php'); // Redirige al index después de la inserción
+            header('Location: index.php'); 
             exit;
         } else {
             $errorInfo = $stmt->errorInfo();
@@ -68,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Actualizar el estado de una solicitud
+    
     if (isset($_POST['actualizar_estado'])) {
         $id_solicitud = isset($_POST['id_solicitud']) ? $_POST['id_solicitud'] : '';
 
@@ -77,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $pdo->prepare($actualizar);
 
         if ($stmt->execute([':id_solicitud' => $id_solicitud])) {
-            header('Location: index.php'); // Redirige al index después de la actualización
+            header('Location: index.php'); 
             exit;
         } else {
             $errorInfo = $stmt->errorInfo();

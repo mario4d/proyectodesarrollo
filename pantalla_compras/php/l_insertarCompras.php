@@ -15,10 +15,10 @@ $data = [
 ];
 
 
-// Insertar en la tabla compra_productos
+
 $result = $pdo->insertCompraProducto($data);
 
-// Actualizar el estado de la solicitud a "pendiente"
+
 if ($result === 'Insert en compraProducto realizado con exito') {
     $updateResult = $pdo->updateEstadoSolicitud($data['idSolicitud'], 'Pendiente');
     echo json_encode(['insert' => $result, 'update' => $updateResult]);
