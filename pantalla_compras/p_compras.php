@@ -14,10 +14,7 @@
 <body>
   <div class="navbar">
     <span>Departamento de Compra</span>
-    <a href="#">Inicio</a>
-    <a href="#">Acerca de</a>
-    <a href="#">Servicios</a>
-    <a href="#">Contacto</a>
+    <button class="navButton" onclick="window.location.href='../Home.php'">Inicio</button>
   </div>
 
   <form class="formulario">
