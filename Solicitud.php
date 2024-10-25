@@ -112,22 +112,22 @@ try {
                 <input type="text" name="id_solicitud" value=<?php echo $id_solicitud; ?> readonly>
 
                 <label>Fecha de Solicitud</label>
-                <input type="date" name="fecha_solicitud" required>
+                <input type="date" name="fecha_solicitud" id="fecha_solicitud"  required>
 
                 <label>Motivo de Solicitud</label>
-                <input type="text" placeholder="Escriba el motivo de su solicitud" name="motivo_solicitud" required>
+                <input type="text" placeholder="Escriba el motivo de su solicitud" maxlength="80" name="motivo_solicitud" required>
 
                 <label>Nombre del Producto</label>
-                <input type="text" placeholder="Escriba el nombre del producto" name="nombre_producto" required>
+                <input type="text" placeholder="Escriba el nombre del producto" maxlength="40" name="nombre_producto" required>
 
                 <label>Marca del Producto</label>
-                <input type="text" placeholder="Escriba la marca del producto" name="marca_producto" required>
+                <input type="text" placeholder="Escriba la marca del producto" maxlength="50" name="marca_producto" required>
 
                 <label>Modelo del Producto</label>
-                <input type="text" placeholder="Escriba el modelo del producto" name="modelo_producto" required>
+                <input type="text" placeholder="Escriba el modelo del producto" maxlength="50" name="modelo_producto" required>
 
                 <label>Cantidad Solicitada</label>
-                <input type="text" id="cantidad" placeholder="Coloque la cantidad que esta solicitando" name="cantidad_producto" required oninput="validarEntrada(this)">
+                <input type="text" id="cantidad" placeholder="Coloque la cantidad que esta solicitando" maxlength="7" name="cantidad_producto" required oninput="validarEntrada(this)">
 
                 <label>Departamento Proveniente</label>
                 <select name="departamento" required>
@@ -161,6 +161,15 @@ try {
             // Elimina caracteres no numéricos
             input.value = input.value.replace(/[^0-9]/g, '');
         }
+        function establecerFechaActual() {
+    const hoy = new Date();
+    const fechaFormateada = hoy.toISOString().split('T')[0];
+    document.getElementById("fecha_solicitud").value = fechaFormateada;
+}
+
+// Llamada a la función al cargar la página
+window.onload = establecerFechaActual;
+        
     </script>
     <?php
         if (isset($_GET['mensaje'])) {
@@ -185,6 +194,9 @@ try {
                 </script>";
             }
         }
+
+
+        
     ?>
 </body>
 </html>
