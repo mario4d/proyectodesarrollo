@@ -12,13 +12,23 @@
 </head>
 
 <body>
-  <form>
-    <h1>Compras</h1>
-    <div>
-      <label for="idproducto">Codigo de producto</label>
-      <input type="text" id="idproducto">
-      <button id="buscar-producto">buscar</button>
+  
+  <form class="formulario">
+    <h1 class="tituloFormularioCompras">Realizar Compras</h1>
+    <div class="listaSolicitudes sides">
+      <h2 >Solicitudes recibidas</h2>
+      <ul id="lista">
+          <!-- Los ítems se generarán aquí -->
+      </ul>
     </div>
+
+    <div class="formularioCompra sides">
+      <h2>Realizar compras</h2>
+
+    </div>
+
+
+    <!-- <h1>Compras</h1>
 
     <label id="mostrar-nombrepr">Nombre del producto: </label>
 
@@ -34,8 +44,9 @@
     <label for="detalle">Detalle de producto</label>
     <input type="text" id="detalle">
 
-    <button id="enviar">Enviar</button>
+    <button id="enviar">Enviar</button> -->
   </form>
+
   <script src="./main.js"></script>
 </body>
 

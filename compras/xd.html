@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Selectable</title>
+    <style>
+        #div2 {
+            display: none; /* Inicialmente oculto */
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="div1">
+    <ul id="lista">
+        <!-- Los ítems se generarán aquí -->
+    </ul>
+</div>
+
+<div id="div2"></div>
+
+<script>
+    // Simulación de resultados de una consulta
+    const resultados = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'hola2'];
+
+    const lista = document.getElementById('lista');
+    const div2 = document.getElementById('div2');
+
+    // Generar la lista a partir de los resultados
+    resultados.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        li.style.cursor = 'pointer'; // Para indicar que es seleccionable
+        li.onclick = function() {
+            mostrarFormulario(item);
+        };
+        lista.appendChild(li);
+    });
+
+    function mostrarFormulario(item) {
+        div2.style.display = 'block'; // Mostrar el div2
+        // Generar el formulario usando innerHTML
+        div2.innerHTML = `
+            <h3>Formulario para ${item}</h3>
+            <form id="miFormulario">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+                <br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <br>
+                <button type="submit">Enviar</button>
+            </form>
+        `;
+    }
+</script>
+
+</body>
+</html>
